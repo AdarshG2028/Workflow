@@ -13,33 +13,32 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Zap" (
-    "id" TEXT NOT NULL,
-    "triggerId" TEXT NOT NULL,
+    "id" UUID NOT NULL,
 
     CONSTRAINT "Zap_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Trigger" (
-    "id" TEXT NOT NULL,
-    "zapId" TEXT NOT NULL,
-    "triggerId" TEXT NOT NULL,
+    "id" UUID NOT NULL,
+    "zapId" UUID NOT NULL,
+    "triggerId" UUID NOT NULL,
 
     CONSTRAINT "Trigger_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Action" (
-    "id" TEXT NOT NULL,
-    "zapId" TEXT NOT NULL,
-    "actionId" TEXT NOT NULL,
+    "id" UUID NOT NULL,
+    "zapId" UUID NOT NULL,
+    "actionId" UUID NOT NULL,
 
     CONSTRAINT "Action_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "AvailableActions" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL,
     "name" TEXT NOT NULL,
 
     CONSTRAINT "AvailableActions_pkey" PRIMARY KEY ("id")
@@ -47,7 +46,7 @@ CREATE TABLE "AvailableActions" (
 
 -- CreateTable
 CREATE TABLE "AvailableTriggers" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL,
     "name" TEXT NOT NULL,
 
     CONSTRAINT "AvailableTriggers_pkey" PRIMARY KEY ("id")
@@ -55,8 +54,8 @@ CREATE TABLE "AvailableTriggers" (
 
 -- CreateTable
 CREATE TABLE "ZapRun" (
-    "id" TEXT NOT NULL,
-    "zapId" TEXT NOT NULL,
+    "id" UUID NOT NULL,
+    "zapId" UUID NOT NULL,
     "metadata" JSONB,
 
     CONSTRAINT "ZapRun_pkey" PRIMARY KEY ("id")
@@ -64,8 +63,8 @@ CREATE TABLE "ZapRun" (
 
 -- CreateTable
 CREATE TABLE "ZapRunOutbox" (
-    "id" TEXT NOT NULL,
-    "zapRunId" TEXT NOT NULL,
+    "id" UUID NOT NULL,
+    "zapRunId" UUID NOT NULL,
 
     CONSTRAINT "ZapRunOutbox_pkey" PRIMARY KEY ("id")
 );
