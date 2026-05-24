@@ -12,13 +12,16 @@
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.19",
-    "typescript": "^6.0.3"
+    "@types/jsonwebtoken": "^9.0.10",
+    "typescript": "^6.0.3",
+    "db": "workspace:*"
   },
   "dependencies": {
     "@types/express": "^5.0.6",
     "cors": "^2.8.6",
     "db": "workspace:*",
     "express": "^5.2.1",
-    "kafkajs": "^2.2.4"
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.4.3"
   }
 }
