@@ -62,7 +62,7 @@ UserRouter.post("/signin", async(req, res) => {
 
     const user = await client.user.findFirst({
         where:{
-            email: parsedData.data.email,
+            email: parsedData.data.username,
             password: parsedData.data.password
         }
     })

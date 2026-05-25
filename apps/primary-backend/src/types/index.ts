@@ -10,7 +10,7 @@ export const signupInputSchema = z.object({
 
 
 export const signinInputSchema = z.object({
-    email: z.string().email(),
+    username: z.string().email(),
     password: z.string()
 })
 
