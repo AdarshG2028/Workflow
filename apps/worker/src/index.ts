@@ -110,7 +110,10 @@ async function main() {
         const metadata = zapRunDetails.metadata;
 
         if (currentAction.type.id === "9e44178d-d37c-4007-86eb-cf71c83d8d09") {
-          const body = (currentAction.metadata as Prisma.JsonObject).body as string;
+          const body = parse(
+            (currentAction.metadata as Prisma.JsonObject).body as string,
+            metadata
+          );
 
           const to = parse(
             (currentAction.metadata as Prisma.JsonObject).email as string,
