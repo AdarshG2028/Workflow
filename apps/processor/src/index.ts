@@ -24,29 +24,29 @@ async function  main() {
         take : 10
     })
     
-    producer.send({
-        topic: TOPIC_NAME,
-        messages: pendingRows.map(r => ({
-            value : r.zapRunId
-            
-        }))
-    })
+    if (pendingRows.length > 0) {
+        console.log(`Processing ${pendingRows.length} outbox entries`)
+        producer.send({
+            topic: TOPIC_NAME,
+            messages: pendingRows.map(r => ({
+                value : JSON.stringify({
+                    zapRunId: r.zapRunId,
+                    stage: 0
+                })
+            }))
+        })
 
-    await client.zapRunOutbox.deleteMany({
-        where: {
-            id: {
-                in: pendingRows.map(r => r.id)
+        await client.zapRunOutbox.deleteMany({
+            where: {
+                id: {
+                    in: pendingRows.map(r => r.id)
+                }
             }
-        }
-    })
+        })
+        console.log(`Deleted ${pendingRows.length} outbox entries`)
+    }
 
-    await client.zapRunOutbox.deleteMany({
-        where: {
-            id: {
-                in: pendingRows.map(r => r.id)
-            }
-        }
-    })
+    await new Promise(resolve => setTimeout(resolve, 3000))
     }
     
     
@@ -54,3 +54,4 @@ async function  main() {
 }
 
 main();
+

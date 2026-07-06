@@ -1,25 +1,25 @@
 "use client";
-import { Appbar } from "../components/Appbar";
-import { CheckFeature } from "../components/CheckFeature";
-import { Input } from "../components/input";
+import { Appbar } from "../../components/Appbar";
+import { CheckFeature } from "../../components/CheckFeature";
+import { Input } from "../../components/input";
 import { PrimaryButton } from "../buttons/primaryButton";
 import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BACKEND_URL } from "../config";
 
-export default function() {
+export default function () {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
-    
-    return <div> 
+
+    return <div>
         <Appbar />
         <div className="flex justify-center">
             <div className="flex pt-8 max-w-4xl">
                 <div className="flex-1 pt-20 px-4">
                     <div className="font-semibold text-3xl pb-4">
-                    Join millions worldwide who automate their work using Zapier.
+                        Join millions worldwide who automate their work using Zapier.
                     </div>
                     <div className="pb-6 pt-4">
                         <CheckFeature label={"Easy setup, no coding required"} />

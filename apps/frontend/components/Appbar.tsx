@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation"
-import { LinkButton } from "../buttons/linkButton"
-import { PrimaryButton } from "../buttons/primaryButton";
+import { LinkButton } from "../app/buttons/linkButton"
+import { PrimaryButton } from "../app/buttons/primaryButton";
 
 export const Appbar = () => {
     const router = useRouter();
@@ -11,7 +11,7 @@ export const Appbar = () => {
         </div>
         <div className="flex">
             <div className="pr-4">
-                <LinkButton onClick={() => {}}>Contact Sales</LinkButton>
+                <LinkButton onClick={() => { }}>Contact Sales</LinkButton>
             </div>
             <div className="pr-4">
                 <LinkButton onClick={() => {
@@ -22,7 +22,7 @@ export const Appbar = () => {
                 router.push("/signup")
             }}>
                 Signup
-            </PrimaryButton>            
+            </PrimaryButton>
         </div>
     </div>
 }

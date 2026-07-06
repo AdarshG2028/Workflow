@@ -3,7 +3,7 @@ import { prismaClient } from 'db';
 
 const app = express();
 app.use(express.json());
-const port = 3000;
+const port = 3002;
 
 app.post('/hooks/catch/:userId/:zapId', async (req: Request, res: Response) => {
     const userId = req.params.userId;

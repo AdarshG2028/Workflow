@@ -7,9 +7,8 @@ export function authMiddleware(req : Request,res : Response,next: NextFunction){
     const token = req.headers.authorization as unknown as string;
 
     try{
-        const payload = jwt.verify(token,JWT_SECRET);
-        // @ts-ignore
-        req.userId = payload.id as unknown as number;
+        const payload = jwt.verify(token, JWT_SECRET) as { id: number };
+        req.userId = payload.id;
         next();
     } catch(e) {
         res.status(403).json({

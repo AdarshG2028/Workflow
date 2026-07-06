@@ -15,10 +15,10 @@ export const signinInputSchema = z.object({
 })
 
 export const ZapCreateSchema = z.object({
-    availableTrigger:z.string(),
-    triggerMetadata:z.string(),
+    availableTriggerId: z.string(),
+    triggerMetadata: z.any().optional(),
     actions:z.array(z.object({
         availableActionId:z.string(),
-        actionMetadata:z.string().optional()
+        actionMetadata: z.any().optional()
     }))
 });
