@@ -21,6 +21,16 @@ async function main() {
         image:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4nd82eFk5SaBPRIeCpmwL7A4YSokA-kXSmw&s",
       },
+      {
+        name: "Update Google Sheet",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl4x7x8x8x8x8x8x8x8x8x8x8x8x8x8x8&s",
+      },
+      {
+        name: "Append to Notion",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3x7x8x8x8x8x8x8x8x8x8x8x8x8x8x8&s",
+      },
     ],
     skipDuplicates: true,
   });

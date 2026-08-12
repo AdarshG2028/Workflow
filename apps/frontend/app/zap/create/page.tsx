@@ -223,8 +223,8 @@ function MetadataEditor({ index, isTrigger, metadata, onSave, onClose }: {
 
     return <div className="fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-slate-100 bg-opacity-70 flex">
         <div className="relative p-4 w-full max-w-2xl max-h-full">
-            <div className="relative bg-white rounded-lg shadow">
-                <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+            <div className="relative bg-white rounded-lg shadow max-h-[85vh] flex flex-col">
+                <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t shrink-0">
                     <div className="text-xl">
                         Edit {isTrigger ? "Trigger" : "Action"} Metadata (Index {index})
                     </div>
@@ -234,7 +234,7 @@ function MetadataEditor({ index, isTrigger, metadata, onSave, onClose }: {
                         </svg>
                     </button>
                 </div>
-                <div className="p-4 md:p-5 space-y-4">
+                <div className="p-4 md:p-5 space-y-4 overflow-y-auto">
                     <div>
                         <label className="block mb-2 text-sm font-medium text-gray-900">Metadata (JSON)</label>
                         <textarea
@@ -255,14 +255,31 @@ function MetadataEditor({ index, isTrigger, metadata, onSave, onClose }: {
 }`}</pre>
                         <p className="text-xs mt-2 text-gray-500">subject is optional</p>
                     </div>
-                    <div className="flex justify-end pt-4">
-                        <button 
-                            onClick={handleSave}
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                        >
-                            Save Metadata
-                        </button>
+                    <div className="text-sm text-gray-600 mt-4">
+                        <p className="font-semibold mb-1">Example for Google Sheets Action:</p>
+                        <pre className="bg-gray-100 p-2 rounded">{`{
+  "spreadsheetId": "your-sheet-id",
+  "range": "Sheet1!A1",
+  "name": "{recipient.name}"
+}`}</pre>
+                        <p className="text-xs mt-2 text-gray-500">Appends: name, timestamp, and full metadata to the sheet</p>
                     </div>
+                    <div className="text-sm text-gray-600 mt-4">
+                        <p className="font-semibold mb-1">Example for Notion Action:</p>
+                        <pre className="bg-gray-100 p-2 rounded">{`{
+  "pageId": "your-page-id",
+  "content": "Thanks {recipient.name} for testing my automation system"
+}`}</pre>
+                        <p className="text-xs mt-2 text-gray-500">Appends: content with automatic timestamp to Notion page</p>
+                    </div>
+                </div>
+                <div className="flex justify-end p-4 md:p-5 border-t shrink-0">
+                    <button
+                        onClick={handleSave}
+                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    >
+                        Save Metadata
+                    </button>
                 </div>
             </div>
         </div>

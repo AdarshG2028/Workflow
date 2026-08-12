@@ -6,7 +6,7 @@ const TOPIC_NAME = "zap-events";
 
 const kafka = new Kafka({
     clientId : "outbox-processor",
-    brokers: ["localhost:9092"],
+    brokers: process.env.KAFKA_BROKERS?.split(",") ?? ["localhost:9092"],
 })
 
 const client =  prismaClient;

@@ -11,6 +11,8 @@ import { PrismaClient, Prisma } from "db";
 import { Kafka } from "kafkajs";
 import { parse } from "./parser.js";
 import { sendEmail } from "./email.js";
+// import { appendRowToSheet } from "./google-sheets.js"; // Google Sheets not in use yet
+import { appendToNotionPage } from "./notion.js";
 
 const prismaClient = new PrismaClient();
 
@@ -18,7 +20,7 @@ const TOPIC_NAME = "zap-events";
 
 const kafka = new Kafka({
   clientId: "outbox-processor-2",
-  brokers: ["localhost:9092"],
+  brokers: process.env.KAFKA_BROKERS?.split(",") ?? ["localhost:9092"],
 });
 
 async function main() {
@@ -109,7 +111,7 @@ async function main() {
 
         const metadata = zapRunDetails.metadata;
 
-        if (currentAction.type.id === "9e44178d-d37c-4007-86eb-cf71c83d8d09") {
+        if (currentAction.type.name === "Send Email") {
           const body = parse(
             (currentAction.metadata as Prisma.JsonObject).body as string,
             metadata
@@ -135,6 +137,62 @@ async function main() {
           await sendEmail(to, body, subject);
 
           console.log("Email finished");
+        }
+
+        // Google Sheets not in use yet — see google-sheets.ts
+        // if (currentAction.type.name === "Update Google Sheet") {
+        //   const spreadsheetId = parse(
+        //     (currentAction.metadata as Prisma.JsonObject).spreadsheetId as string,
+        //     metadata
+        //   );
+
+        //   const range = parse(
+        //     (currentAction.metadata as Prisma.JsonObject).range as string,
+        //     metadata
+        //   );
+
+        //   // Build row data with name, timestamp, and additional metadata
+        //   const rowData = [
+        //     parse(
+        //       (currentAction.metadata as Prisma.JsonObject).name as string,
+        //       metadata
+        //     ),
+        //     new Date().toISOString(),
+        //     JSON.stringify(metadata),
+        //   ];
+
+        //   console.log("Appending row to Google Sheet...");
+        //   console.log({
+        //     spreadsheetId,
+        //     range,
+        //     rowData,
+        //   });
+
+        //   await appendRowToSheet(spreadsheetId, range, [rowData]);
+
+        //   console.log("Google Sheet update finished");
+        // }
+
+        if (currentAction.type.name === "Append to Notion") {
+          const pageId = parse(
+            (currentAction.metadata as Prisma.JsonObject).pageId as string,
+            metadata
+          );
+
+          const content = parse(
+            (currentAction.metadata as Prisma.JsonObject).content as string,
+            metadata
+          );
+
+          console.log("Appending to Notion page...");
+          console.log({
+            pageId,
+            content,
+          });
+
+          await appendToNotionPage(pageId, content);
+
+          console.log("Notion append finished");
         }
 
         await new Promise((r) => setTimeout(r, 500));

@@ -14,7 +14,7 @@ export const Hero = () => {
         </div>
         <div className="flex justify-center pt-2">
             <div className="text-xl font-bold font-normal text-center pt-8 max-w-2xl">
-                AI gives you automation superpowers, and Zapier puts them to work. Pairing AI and Zapier helps you turn ideas into workflows and bots that work for you.
+                AI gives you automation superpowers, and Auto-Ease puts them to work. Pairing AI and Auto-Ease helps you turn ideas into workflows and bots that work for you.
             </div>
         </div>
 
